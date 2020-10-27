@@ -1,0 +1,46 @@
+using System;
+using System.Linq;
+
+public class Kata 
+{
+  public static double infected(string s)
+  {
+    int count=0;
+    for(int i=0; i<s.Length; i++)
+    {
+      if(s[i]=='X')
+        {
+        count++;
+      }
+    }
+    int total=s.Length-count;
+    if(total==0)
+      {
+      return 0;
+    }
+    else{
+    return (helper(s)/total) * 100;
+    }
+  }
+  public static double helper(string s)
+  {
+    int count=0;
+    int infect=0;
+    while(count<s.Length && s[count]!='X')
+    {
+      if(s[count]=='1')
+        {
+        infect=1;
+      }
+      count++;
+    }
+    if(count>=s.Length-1)
+    {
+      return infect*count;
+    }
+    else{
+      return (infect*count) + helper(s.Substring(count+1));
+    }
+  }
+  
+}
